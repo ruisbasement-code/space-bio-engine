@@ -32,7 +32,7 @@ export default function HomePage() {
     <div className="min-h-screen">
       <header className="px-6 pt-10 pb-6 text-center">
         <h1 className="text-4xl font-bold text-indigo-400">
-          Space Biology Knowledge Engine
+          Space Biology Knowledge Engine 
         </h1>
         <p className="mt-2 text-sm text-slate-300">
           Mock search over 10 NASA bioscience papers (local JSON).
