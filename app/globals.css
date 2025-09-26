@@ -1,22 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html {
-  font-size: 16px;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #0f172a;
-  color: #e2e8f0;
-  line-height: 1.6;
-}
-
-h1, h2, h3 {
-  font-weight: 600;
-}
-
-a {
-  text-decoration: none;
-}
+:root { --bg:#0b1020; --panel: rgba(255,255,255,.08); --txt:#e8ecff; --accent:#87e7ff; }
+* { box-sizing: border-box }
+html,body { min-height:100%; background:var(--bg); color:var(--txt); margin:0; font:16px/1.5 system-ui, Arial, sans-serif }
+.main { max-width:1100px; margin:0 auto; padding:32px 20px }
+.glass { background:var(--panel); border:1px solid rgba(255,255,255,.12); backdrop-filter: blur(10px); border-radius:20px; padding:20px; }
+.h1 { font-size:34px; margin:10px 0 20px }
+.row { display:grid; gap:18px; grid-template-columns: 1fr }
+@media (min-width:900px){ .row{ grid-template-columns: 1.2fr .8fr } }
+.btn { background:var(--accent); color:#03202a; padding:12px 18px; border:0; border-radius:12px; cursor:pointer; font-weight:700 }
+.link { color: var(--accent); text-decoration: none; font-weight:600 }
+.hero { min-height:54vh; display:grid; place-items:center; text-align:center; border-radius:28px; background: radial-gradient(1200px 500px at 50% -10%, rgba(255,255,255,.06), transparent) }
+.stack { display:flex; gap:12px; flex-wrap:wrap; align-items:center }
+.figure { height:180px; background:rgba(255,255,255,.09); border-radius:14px; display:grid; place-items:center; color:#bcd; }
+.col2 { columns: 2 280px; column-gap: 26px }
+.note { background: rgba(255,255,255,.07); border-radius: 14px; padding:12px }

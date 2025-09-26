@@ -1,56 +1,44 @@
 "use client";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { useMemo, useState } from "react";
-import papers from "@/data/papers";
-import type { Paper } from "@/types/paper";
-import SearchBar from "@/components/SearchBar";
-import ResultCard from "@/components/ResultCard";
+export default function Page() {
+  const [greeting, setGreeting] = useState("Hello Commander.");
+  const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
 
-function matches(p: Paper, query: string) {
-  if (!query.trim()) return true;
-  const q = query.toLowerCase();
-  return (
-    p.title.toLowerCase().includes(q) ||
-    p.abstract.toLowerCase().includes(q) ||
-    p.tags.some((t) => t.toLowerCase().includes(q)) ||
-    String(p.year).includes(q)
-  );
-}
+  useEffect(() => {
+    const storedName = localStorage.getItem("profile.name");
+    if (storedName) {
+      setGreeting(`Hello ${storedName}.`);
+    }
+    // Remove localStorage key from the reverted feature
+    localStorage.removeItem("ui.lastPlanet");
+  }, []);
 
-export default function HomePage() {
-  const [query, setQuery] = useState("");
-
-  const results = useMemo(
-    () =>
-      papers
-        .filter((p) => matches(p, query))
-        .sort((a, b) => (b.year - a.year) || a.title.localeCompare(b.title)),
-    [query]
-  );
+  // Restored original search handler
+  const handleExplore = () => {
+    router.push('/missions');
+  };
 
   return (
-    <div className="min-h-screen">
-      <header className="px-6 pt-10 pb-6 text-center">
-        <h1 className="text-4xl font-bold text-indigo-400">
-          Space Biology Knowledge Engine 
-        </h1>
-        <p className="mt-2 text-sm text-slate-300">
-          Mock search over 10 NASA bioscience papers (local JSON).
-        </p>
-        <div className="mt-6">
-          <SearchBar value={query} onChange={setQuery} />
+    <main className="main">
+      <section className="glass hero">
+        <div>
+          <h1 className="h1">{greeting}</h1>
+          <p>What would you like to learn?</p>
+          <div style={{ marginTop: 16, display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+            <input
+              aria-label="Search"
+              placeholder="Search…"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{ padding: "12px 14px", minWidth: 260, borderRadius: 12, border: "1px solid rgba(255,255,255,.18)", background: "rgba(255,255,255,.06)", color: "var(--txt)" }}
+            />
+            <button onClick={handleExplore} className="btn">Explore</button>
+          </div>
         </div>
-      </header>
-
-      <section className="mx-auto grid max-w-4xl gap-4 px-6 pb-16">
-        {results.length === 0 ? (
-          <p className="text-slate-300 text-center">
-            No results. Try “plants” or “microgravity”.
-          </p>
-        ) : (
-          results.map((p) => <ResultCard key={p.id} paper={p} />)
-        )}
       </section>
-    </div>
+    </main>
   );
 }

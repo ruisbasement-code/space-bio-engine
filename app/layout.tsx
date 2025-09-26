@@ -1,50 +1,25 @@
-"use client";
-import Link from "next/link";
-import { useState, useRef } from "react";
+import "./globals.css";
+import "./MainLayout.css";
+import ErrorBoundary from "./_client/ErrorBoundary";
+import HydrationGuard from "./_client/HydrationGuard";
+import MainLayout from "./MainLayout";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+export const metadata = { title: "Space Biology Knowledge Engine" };
 
-  const toggleMusic = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="font-sans bg-slate-950 text-slate-100">
-        <audio ref={audioRef} src="/space_project_bgm.m4a" loop />
-        <header className="bg-slate-900 shadow-md">
-          <nav className="mx-auto max-w-7xl px-4 py-4 flex justify-between items-center">
-            <h1 className="text-xl font-bold">Space Biology Knowledge Engine</h1>
-            <div>
-              <Link
-                href="/"
-                className="text-sm text-indigo-400 hover:text-indigo-300 transition"
-              >
-                Home
-              </Link>
-              <button
-                onClick={toggleMusic}
-                className="ml-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-full shadow-lg transition"
-              >
-                {isPlaying ? "Pause Music" : "Play Music"}
-              </button>
-            </div>
-          </nav>
-        </header>
-        <main className="pt-6">{children}</main>
+      <body>
+        <ErrorBoundary>
+          <HydrationGuard>
+            <MainLayout>{children}</MainLayout>
+          </HydrationGuard>
+        </ErrorBoundary>
+        <script dangerouslySetInnerHTML={{__html: `
+          window.onerror=(m,s,l,c,e)=>{document.body.innerHTML='<pre style="white-space:pre-wrap;color:#fff;background:#0b1020;padding:20px">'+((e&&e.stack)||m)+'</pre>'};
+          window.onunhandledrejection=(e)=>{document.body.innerHTML='<pre style="white-space:pre-wrap;color:#fff;background:#0b1020;padding:20px">'+((e&&e.reason&&e.reason.stack)||e.reason)+'</pre>'};
+          if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations?.().then(rs=>rs.forEach(r=>r.unregister()));}
+        `}} />
       </body>
     </html>
   );
