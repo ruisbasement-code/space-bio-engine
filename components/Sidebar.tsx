@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import './Sidebar.css';
 
 interface SidebarProps {
@@ -16,8 +17,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </div>
         <nav>
           <ul>
-            <li><a href="/" onClick={onClose}>Main Page</a></li>
-            <li><a href="/profile" onClick={onClose}>Profile</a></li>
+            <li><Link href="/" onClick={onClose}>Main Page</Link></li>
+            <li><Link href="/profile" onClick={onClose}>Profile</Link></li>
           </ul>
         </nav>
       </div>

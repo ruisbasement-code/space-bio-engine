@@ -1,5 +1,4 @@
 "use client";
-import Go from "../_client/Go";
 import { useEduLevel, Level } from "../_client/useEduLevel";
 import { useRouter } from "next/navigation";
 

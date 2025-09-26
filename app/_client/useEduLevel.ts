@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export type Level = "Kid" | "Student" | "Professional";
 const KEY = "eduLevel";
-const isLevel = (v: any): v is Level =>
+const isLevel = (v: unknown): v is Level =>
   v === "Kid" || v === "Student" || v === "Professional";
 
 function read(): Level {

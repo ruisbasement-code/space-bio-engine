@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-export default class ErrorBoundary extends React.Component<{children: React.ReactNode},{hasError:boolean;err:any}>{
-  constructor(p:any){super(p);this.state={hasError:false,err:null};}
-  static getDerivedStateFromError(err:any){return{hasError:true,err};}
-  componentDidCatch(err:any,info:any){console.error("App crashed:",err,info);}
+export default class ErrorBoundary extends React.Component<{children: React.ReactNode},{hasError:boolean;err:Error|null}>{
+  constructor(props: { children: React.ReactNode }) {super(props);this.state={hasError:false,err:null};}
+  static getDerivedStateFromError(err:Error){return{hasError:true,err};}
+  componentDidCatch(err:Error,info:React.ErrorInfo){console.error("App crashed:",err,info);}
   render(){return this.state.hasError
     ? <div style={{background:"#0b1020",color:"#fff",minHeight:"100vh",padding:20}}>
         <h1>❌ App crashed</h1>
