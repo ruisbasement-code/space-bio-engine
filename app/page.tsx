@@ -16,9 +16,18 @@ export default function Page() {
     localStorage.removeItem("ui.lastPlanet");
   }, []);
 
-  // Restored original search handler
   const handleExplore = () => {
-    router.push('/missions');
+    if (searchTerm.trim().toLowerCase() === "planets") {
+      router.push('/planets');
+    } else {
+      router.push('/missions');
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleExplore();
+    }
   };
 
   return (
@@ -33,6 +42,7 @@ export default function Page() {
               placeholder="Search…"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyDown}
               style={{ padding: "12px 14px", minWidth: 260, borderRadius: 12, border: "1px solid rgba(255,255,255,.18)", background: "rgba(255,255,255,.06)", color: "var(--txt)" }}
             />
             <button onClick={handleExplore} className="btn">Explore</button>

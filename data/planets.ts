@@ -1,108 +1,36 @@
-export interface Planet {
-  id: string;
+export type Planet = {
+  id: 'mercury'|'venus'|'earth'|'mars'|'jupiter'|'saturn'|'uranus'|'neptune';
   name: string;
-  tagline: string;
+  title: string;
   summary: string;
-  facts: { label: string; value: string }[];
+  figure1: string;
+  figure2: string;
   image: string;
-  bgGradient?: string;
-}
+};
 
 export const planets: Planet[] = [
   {
-    id: "mercury",
-    name: "Mercury",
-    tagline: "The smallest planet, closest to the Sun.",
-    summary: "Mercury is the smallest planet in our solar system and nearest to the Sun. Its orbit is the most eccentric of all the planets.",
-    facts: [
-      { label: "Day Length", value: "59 Earth days" },
-      { label: "Surface Temp", value: "430°C (day), -180°C (night)" },
-      { label: "Atmosphere", value: "Thin, mostly oxygen, sodium, hydrogen" }
-    ],
-    image: "/assets/planets/mercury.png",
+    id: 'mercury',
+    name: 'Mercury',
+    title: 'Surface and Exosphere of Mercury',
+    summary: 'Airless, cratered world with extreme temperature swings; tenuous exosphere of Na, K, O.',
+    figure1: 'Limb temperature profile',
+    figure2: 'Exosphere composition snapshot',
+    image: '/assets/planets/mercury.png'
   },
   {
-    id: "venus",
-    name: "Venus",
-    tagline: "Thick atmosphere, crushing pressure, scorching temps.",
-    summary: "Venus is the second planet from the Sun. It has a thick, toxic atmosphere filled with carbon dioxide and is perpetually shrouded in thick, yellowish clouds of sulfuric acid that trap heat, causing a runaway greenhouse effect.",
-    facts: [
-      { label: "Day Length", value: "243 Earth days" },
-      { label: "Surface Temp", value: "465°C" },
-      { label: "Atmosphere", value: "CO₂, N₂" }
-    ],
-    image: "/assets/planets/venus.png",
+    id: 'venus',
+    name: 'Venus',
+    title: 'Atmospheric Composition and Surface Conditions of Venus',
+    summary: 'Runaway greenhouse, ~92 bar surface pressure, 96% CO₂ with sulfuric acid clouds; super-rotation.',
+    figure1: 'Cloud-top wind vectors',
+    figure2: 'Surface temperature map',
+    image: '/assets/planets/venus.png'
   },
-  {
-    id: "earth",
-    name: "Earth",
-    tagline: "Our home, with oceans of liquid water.",
-    summary: "Our home planet is the only place we know of so far that’s inhabited by living things. It's also the only planet in our solar system with liquid water on the surface.",
-    facts: [
-      { label: "Day Length", value: "24 hours" },
-      { label: "Surface Temp", value: "15°C (average)" },
-      { label: "Atmosphere", value: "N₂, O₂, Ar" }
-    ],
-    image: "/assets/planets/earth.png",
-  },
-  {
-    id: "mars",
-    name: "Mars",
-    tagline: "The dusty, cold, desert world.",
-    summary: "Mars is a dusty, cold, desert world with a very thin atmosphere. There is strong evidence Mars was—billions of years ago—wetter and warmer, with a thicker atmosphere.",
-    facts: [
-      { label: "Day Length", value: "24.6 hours" },
-      { label: "Surface Temp", value: "-65°C (average)" },
-      { label: "Atmosphere", value: "CO₂, Ar, N₂" }
-    ],
-    image: "/assets/planets/mars.png",
-  },
-  {
-    id: "jupiter",
-    name: "Jupiter",
-    tagline: "The largest planet, a gas giant.",
-    summary: "Jupiter is more than twice as massive than the other planets of our solar system combined. The giant planet's Great Red Spot is a centuries-old storm bigger than Earth.",
-    facts: [
-      { label: "Day Length", value: "9.9 hours" },
-      { label: "Cloud Top Temp", value: "-145°C" },
-      { label: "Atmosphere", value: "H₂, He" }
-    ],
-    image: "/assets/planets/jupiter.png",
-  },
-  {
-    id: "saturn",
-    name: "Saturn",
-    tagline: "Adorned with a dazzling, complex system of icy rings.",
-    summary: "Saturn is the sixth planet from the Sun and the second-largest planet in our solar system. Adorned with a dazzling, complex system of icy rings, Saturn is unique among the planets.",
-    facts: [
-      { label: "Day Length", value: "10.7 hours" },
-      { label: "Cloud Top Temp", value: "-175°C" },
-      { label: "Atmosphere", value: "H₂, He" }
-    ],
-    image: "/assets/planets/saturn.png",
-  },
-  {
-    id: "uranus",
-    name: "Uranus",
-    tagline: "Rotates at a nearly 90-degree angle from the plane of its orbit.",
-    summary: "Uranus is the seventh planet from the Sun. It’s a hot, dense fluid of 'icy' materials – water, methane, and ammonia – above a small rocky core.",
-    facts: [
-      { label: "Day Length", value: "17.2 hours" },
-      { label: "Cloud Top Temp", value: "-224°C" },
-      { label: "Atmosphere", value: "H₂, He, CH₄" }
-    ],
-    image: "/assets/planets/uranus.png",
-  },
-  {
-    id: "neptune",
-    name: "Neptune",
-    tagline: "The dark, cold, and windy ice giant.",
-    summary: "Neptune is the eighth and most distant major planet orbiting our Sun. It's dark, cold, and whipped by supersonic winds. It was the first planet located through mathematical calculation.",
-    facts: [
-      { label: "Day Length", value: "16.1 hours" },
-      { label: "Cloud Top Temp", value: "-214°C" },
-      { label: "Atmosphere", value: "H₂, He, CH₄" }
-    ],
-    image: "/assets/planets/neptune.png",
-  },
+  { id:'earth', name:'Earth', title:'Systems of Earth', summary:'Liquid water oceans, nitrogen-oxygen atmosphere, magnetosphere supports life.', figure1: 'Oceanic currents', figure2: 'Atmospheric layers', image:'/assets/planets/earth.png' },
+  { id:'mars', name:'Mars', title:'Mars: Thin Atmosphere, Dust, and Ice', summary:'CO₂-dominated thin air, frequent dust storms, polar caps, past water activity.', figure1: 'Olympus Mons', figure2: 'Polar ice cap', image:'/assets/planets/mars.png' },
+  { id:'jupiter', name:'Jupiter', title:'Jupiter: Giant Atmospheres and Storms', summary:'Hydrogen-helium giant with deep jets and persistent anticyclones like the Great Red Spot.', figure1: 'Great Red Spot', figure2: 'Galilean moons', image:'/assets/planets/jupiter.png' },
+  { id:'saturn', name:'Saturn', title:'Saturn and Ring System', summary:'Low-density H/He giant; ring particle dynamics and seasonal atmospheric bands.', figure1: 'Ring system', figure2: 'Hexagonal storm', image:'/assets/planets/saturn.png' },
+  { id:'uranus', name:'Uranus', title:'Uranus: Tilted Ice Giant', summary:'Methane-rich upper atmosphere, extreme axial tilt, faint ring system.', figure1: 'Axial tilt diagram', figure2: 'Ring system', image:'/assets/planets/uranus.png' },
+  { id:'neptune', name:'Neptune', title:'Neptune: Supersonic Winds', summary:'Icy giant with high-velocity winds and transient dark spots; methane gives blue hue.', figure1: 'Great Dark Spot', figure2: 'Triton', image:'/assets/planets/neptune.png' }
 ];

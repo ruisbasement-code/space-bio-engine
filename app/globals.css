@@ -1,6 +1,7 @@
 :root { --bg:#0b1020; --panel: rgba(255,255,255,.08); --txt:#e8ecff; --accent:#87e7ff; }
 * { box-sizing: border-box }
-html,body { min-height:100%; background:var(--bg); color:var(--txt); margin:0; font:16px/1.5 system-ui, Arial, sans-serif }
+html,body { height:100%; min-height:100%; background:var(--bg); color:var(--txt); margin:0; font:16px/1.5 system-ui, Arial, sans-serif }
+body { overflow-x: hidden; }
 .main { max-width:1100px; margin:0 auto; padding:32px 20px }
 .glass { background:var(--panel); border:1px solid rgba(255,255,255,.12); backdrop-filter: blur(10px); border-radius:20px; padding:20px; }
 .h1 { font-size:34px; margin:10px 0 20px }
@@ -13,3 +14,55 @@ html,body { min-height:100%; background:var(--bg); color:var(--txt); margin:0; f
 .figure { height:180px; background:rgba(255,255,255,.09); border-radius:14px; display:grid; place-items:center; color:#bcd; }
 .col2 { columns: 2 280px; column-gap: 26px }
 .note { background: rgba(255,255,255,.07); border-radius: 14px; padding:12px }
+.note { background: rgba(255,255,255,.07); border-radius: 14px; padding:12px }
+
+/* Hide legacy bottom-left panel if it reappears */
+#planet-info-panel, .planet-details, .info-box { display:none !important; }
+
+/* Overlay */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  opacity: 0; pointer-events: none;
+  transition: opacity 200ms ease;
+  z-index: 999;
+}
+.overlay.show { opacity: 1; pointer-events: auto; }
+
+/* Dialog card */
+.dialog {
+  position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.98);
+  width: min(560px, 92vw); max-width: 92vw;
+  background: rgba(20,24,32,0.96);
+  color: #e9edf3;
+  border: 1.5px solid rgba(255,255,255,0.22);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  transition: transform 200ms ease, opacity 200ms ease;
+  opacity: 0;
+  z-index: 1000;
+}
+.dialog.show { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+.hidden { display: none; }
+
+/* Sections */
+.dialog__header, .dialog__footer { padding: 16px 20px; }
+.dialog__body { padding: 12px 20px 18px; }
+.dialog__header {
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.dialog__footer {
+  display:flex; gap:12px; justify-content:flex-end;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+#planet-modal-title { margin:0; font-size: clamp(18px, 2.2vw, 22px); font-weight:700; }
+.icon-btn { background:transparent; border:0; color:#e9edf3; font-size:22px; line-height:1; cursor:pointer; padding:2px 6px; border-radius:8px; }
+.icon-btn:hover { background: rgba(255,255,255,0.08); }
+
+.btn { padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.06); color:#e9edf3; cursor:pointer; }
+.btn:hover { background:rgba(255,255,255,0.12); }
+.btn--primary { background:#4c84ff; border-color:#4c84ff; color:#fff; }
+.btn--primary:hover { filter:brightness(1.05); }

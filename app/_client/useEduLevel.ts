@@ -8,6 +8,11 @@ const isLevel = (v: unknown): v is Level =>
 
 function read(): Level {
   if (typeof window === "undefined") return "Kid";
+  const params = new URLSearchParams(window.location.search);
+  const levelFromQuery = params.get('level');
+  if (isLevel(levelFromQuery)) {
+    return levelFromQuery;
+  }
   const v = localStorage.getItem(KEY);
   return isLevel(v) ? v : "Kid";
 }
