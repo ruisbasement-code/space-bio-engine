@@ -12,7 +12,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     <>
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
-          <span>Level: Kid</span>
           <button onClick={onClose} className="close-btn">&times;</button>
         </div>
         <nav>
