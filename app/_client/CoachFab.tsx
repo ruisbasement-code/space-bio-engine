@@ -57,7 +57,7 @@ function insertIntoNotes(text: string) {
       (el as HTMLTextAreaElement).dispatchEvent(new Event("input", { bubbles: true }));
       return true;
     }
-    if ("innerText" in (el as any)) { (el as any).innerText = text; return true; }
+    if ("innerText" in el) { (el as HTMLElement).innerText = text; return true; }
   }
   return false;
 }
@@ -79,11 +79,11 @@ export default function CoachFab() {
       if (raw) setMessages(JSON.parse(raw));
       else setMessages([{ role: "assistant", content: "Hi! I can summarize, explain, make study notes, or quiz you. Ask me anything and I’ll match your style (e.g., 'explain like I’m 10', 'be more formal')." }]);
     } catch {}
-  }, []);
+  }, [key]);
   useEffect(() => {
     try { localStorage.setItem(key, JSON.stringify(messages)); } catch {}
     if (open && bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
-  }, [messages, open]);
+  }, [messages, open, key]);
 
   async function send(text: string) {
     if (!text.trim() || busy) return;
@@ -102,8 +102,9 @@ export default function CoachFab() {
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || "Request failed");
       setMessages(m => [...m, { role: "assistant", content: data.reply }]);
-    } catch (e:any) {
-      setErr(e?.message || "Something went wrong.");
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "Something went wrong.";
+      setErr(message);
       setMessages(m => [...m, { role: "assistant", content: "Sorry—something went wrong. Check your API key and try again." }]);
     } finally {
       setBusy(false);

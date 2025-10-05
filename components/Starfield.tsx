@@ -14,7 +14,8 @@ export default function Starfield() {
     }
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
-    let dpr = Math.max(1, window.devicePixelRatio || 1), W = 0, H = 0;
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    let W = 0, H = 0;
     function resize() {
       W = window.innerWidth;
       H = window.innerHeight;
@@ -28,7 +29,7 @@ export default function Starfield() {
     const STAR_COUNT = Math.min(3200, Math.floor(W * H / 1000));
     const COMET_SPAWN_SEC = 5;
     const rand = (a=0,b=1)=>a+Math.random()*(b-a);
-    const pick = (a: any[])=>a[(Math.random()*a.length)|0];
+    const pick = <T,>(a: T[]): T => a[Math.floor(Math.random() * a.length)];
     const starColors = ["#cdd9ff","#dbe4ff","#f6f7ff","#b9d0ff","#9cc0ff","#ffe5a8","#ffd3a6","#ffb3a3"];
     const planetHints = ["#6fa8ff","#a5c8ff","#c2a1ff"];
     const stars = Array.from({ length: STAR_COUNT }).map(() => ({
@@ -38,18 +39,20 @@ export default function Starfield() {
       color: Math.random()<0.995?pick(starColors):pick(planetHints),
       driftX: rand(-0.02,0.02), driftY: rand(-0.01,0.01)
     }));
-    let comets: any[] =[], cometTimer=0;
+    type Comet = { x: number; y: number; dx: number; dy: number; len: number };
+    let comets: Comet[] = [], cometTimer = 0;
     function spawnComet(){
       const left=Math.random()<0.5;
       comets.push({x:left?-50:W+50,y:rand(0,H*0.7),dx:left?rand(2,3):-rand(2,3),dy:rand(0.4,0.8),len:rand(80,150)});
     }
-    function drawStar(s: any,t: number){
+    type Star = { x: number; y: number; r: number; baseA: number; tw: number; phase: number; color: string; driftX: number; driftY: number };
+    function drawStar(s: Star, t: number) {
       const a=s.baseA*(0.7+0.3*Math.sin(t*s.tw+s.phase));
       ctx!.globalAlpha=a; ctx!.fillStyle=s.color;
       ctx!.beginPath(); ctx!.arc(s.x,s.y,s.r,0,Math.PI*2); ctx!.fill();
       ctx!.globalAlpha=1;
     }
-    function drawComet(c: any){
+    function drawComet(c: Comet) {
       const g=ctx!.createLinearGradient(c.x,c.y,c.x-c.dx*c.len,c.y-c.dy*c.len);
       g.addColorStop(0,"rgba(255,255,255,0.9)"); g.addColorStop(1,"rgba(255,255,255,0)");
       ctx!.strokeStyle=g; ctx!.lineWidth=1.3;

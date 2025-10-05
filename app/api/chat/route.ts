@@ -56,7 +56,8 @@ export async function POST(req: NextRequest) {
     const data = await r.json();
     const reply = data?.choices?.[0]?.message?.content?.trim() || "No response.";
     return NextResponse.json({ reply });
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message || "Unexpected error" }, { status: 500 });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "An unexpected error occurred.";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -1,11 +1,9 @@
 "use client";
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import './page.css';
 
 export default function Page() {
   const [greeting, setGreeting] = useState("Hello Commander.");
-  const router = useRouter();
   useEffect(() => {
     const storedName = localStorage.getItem("profile.name");
     if (storedName) {

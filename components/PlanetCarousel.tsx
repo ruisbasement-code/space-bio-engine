@@ -1,12 +1,10 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { planets } from '../data/planets';
 import './PlanetCarousel.css';
 
 export default function PlanetCarousel() {
-  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
   const ringRef = useRef<HTMLDivElement>(null);
