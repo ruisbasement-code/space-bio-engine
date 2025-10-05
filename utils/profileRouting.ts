@@ -1,16 +1,16 @@
 // utils/profileRouting.ts
 export function nextUrlForMarsFromProfile(): string {
-  // Read whichever your Profile saved; default to student
+  // Read whichever your Profile saved; default to kid
   const raw =
     typeof window !== "undefined"
-      ? (localStorage.getItem("level") || localStorage.getItem("role") || "student")
-      : "student";
+      ? (localStorage.getItem("level") || localStorage.getItem("role") || "kid")
+      : "kid";
 
   const role = raw.toLowerCase();
   const profile =
     role === "kid" || role === "student" || role === "professional"
       ? role
-      : "student";
+      : "kid";
 
   // Keep your current route shape exactly:
   // /venus/kid?planet=mars&profile=<kid|student|professional>

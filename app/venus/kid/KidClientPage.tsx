@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import TTSButton from "@/app/_client/TTSButton";
 
 
 type Profile = "kid" | "student" | "professional";
@@ -20,12 +21,12 @@ export default function KidClientPage() {
 
   useEffect(() => {
     const stored =
-      (localStorage.getItem("level") || localStorage.getItem("role") || "student").toLowerCase();
+      (localStorage.getItem("level") || localStorage.getItem("role") || "kid").toLowerCase();
 
     const desired: Profile =
       stored === "kid" || stored === "student" || stored === "professional"
         ? (stored as Profile)
-        : "student";
+        : "kid";
 
     const planet = qp.planet || "mars";
     const urlProf: Profile =
@@ -110,6 +111,9 @@ function Header({ profile }: { profile: Profile }) {
 
 /* Keep your existing content blocks; included here for completeness */
 function KidContent() {
+  const textToRead = `NASA wants to learn how plants and their tiny helper germs can grow in space! These germs help roots stay strong and make food for the plants. But in space, there’s no gravity and a lot of space rays that could bother them.
+  Scientists use a small plant called Arabidopsis to test how roots grow when they get “space-like” radiation. They also spin the plants in a clinostat to pretend there’s no gravity! This helps NASA see how plants act in space before sending them to Mars.
+  The goal is to help astronauts grow fresh food on Mars and keep their plants and roots happy, even when space rays try to cause trouble!`;
   return (
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'left', maxWidth: '850px', margin: '0 auto', color: 'white' }}>
   <h1 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '1rem' }}>
@@ -142,6 +146,7 @@ function KidContent() {
   <p style={{ fontSize: '1rem', marginTop: '0.5rem' }}>
     <i>Based on NASA Task Book: Impact of Space Radiation & Simulated Microgravity on Plant Root Microbiomes (TASKID 16169)</i>
   </p>
+  <TTSButton text={textToRead} />
 </div>
   );
 }
@@ -167,6 +172,7 @@ function StudentContent() {
 }
 
 function ProContent() {
+  const textToRead = `Impact of Space Radiation and Simulated Microgravity on Plant Root Microbiomes. This investigation explores how ionizing radiation and microgravity together influence plant–microbe systems in deep space. The study focuses on whether exposure to galactic cosmic rays (GCRs) disrupts the root microbial ecosystem, potentially altering microbial diversity, nutrient cycling, and crop yield—critical factors for sustaining long-duration space missions. The research uses Arabidopsis thaliana inoculated with a synthetic community of 188 bacterial species representing natural soil diversity. Plants are exposed to simulated cosmic radiation doses of 0.75 Gy at the NASA Space Radiation Laboratory, both as single and fractionated exposures, and paired with simulated microgravity via a 1-D clinostat. The combined design allows assessment of dose-rate dependence and synergistic stress responses. Data from these studies reveal that high-dose radiation decreases microbial diversity within the rhizosphere while increasing stress-related gene expression in plant roots. When combined with microgravity, these effects amplify, leading to measurable declines in root health and nutrient exchange efficiency. Such findings indicate that microbial imbalance could significantly threaten bioregenerative life support systems used for space farming. The interdisciplinary research team—spanning expertise in radiation biology, plant microbiome ecology, and spaceflight simulation—is mapping the key dose thresholds and microbial species most sensitive to GCRs. Their findings will inform engineering of resilient plant–microbe partnerships and microbial shielding strategies to maintain sustainable crop systems on Mars and beyond.`;
   return (
 <div className="professional-content" style={{ maxWidth: "900px", margin: "0 auto", color: "white" }}>
   
@@ -240,6 +246,7 @@ function ProContent() {
     Based on NASA Task Book: <em>Impact of Space Radiation & Simulated Microgravity
     on Plant Root Microbiomes (TASKID 16169)</em>.
   </p>
+  <TTSButton text={textToRead} />
 </div>
   );
 }
