@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Planet } from '@/data/planets';
+import { nextUrlForMarsFromProfile } from '../utils/profileRouting';
 
 interface PlanetQuickViewProps {
   open: boolean;
@@ -47,15 +48,8 @@ export default function PlanetQuickView({ open, planet, onClose }: PlanetQuickVi
 
   const handleLearnMore = () => {
     if (planet?.id === 'mars') {
-      const raw =
-        (localStorage.getItem("level") || localStorage.getItem("role") || "student").toLowerCase();
-      const profile =
-        raw === "kid" || raw === "student" || raw === "professional" ? raw : "student";
-
-      const url = `/venus/kid?planet=mars&profile=${profile}`;
-
+      const url = nextUrlForMarsFromProfile();
       onClose?.();
-      // ✅ HARD REDIRECT (bypasses any client cache/Link issues)
       window.location.href = url;
     } else {
       router.push(`/planet/${planet.id}`);
