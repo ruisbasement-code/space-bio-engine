@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import './page.css';
 
 export default function Page() {
   const [greeting, setGreeting] = useState("Hello Commander.");
-  const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -12,40 +12,45 @@ export default function Page() {
     if (storedName) {
       setGreeting(`Hello ${storedName}.`);
     }
-    // Remove localStorage key from the reverted feature
     localStorage.removeItem("ui.lastPlanet");
   }, []);
 
-  const handleExplore = () => {
-    if (searchTerm.trim().toLowerCase() === "planets") {
-      router.push('/planets');
-    } else {
-      router.push('/missions');
-    }
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      handleExplore();
-    }
-  };
-
   return (
-    <main className="main">
-      <section className="glass hero">
-        <div>
-          <h1 className="h1">{greeting}</h1>
-          <p>What would you like to learn?</p>
-          <div style={{ marginTop: 16, display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <input
-              aria-label="Search"
-              placeholder="Search…"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={handleKeyDown}
-              style={{ padding: "12px 14px", minWidth: 260, borderRadius: 12, border: "1px solid rgba(255,255,255,.18)", background: "rgba(255,255,255,.06)", color: "var(--txt)" }}
-            />
-            <button onClick={handleExplore} className="btn">Explore</button>
+    <main>
+      <section className="home-hero">
+        <div className="header">
+          <h1>{greeting}</h1>
+          <p className="sub">What would you like to learn?</p>
+        </div>
+
+        <div className="topic-row">
+          {/* Card 1: Clickable */}
+          <div 
+            id="card-planets" 
+            className="topic-card clickable" 
+            aria-label="Planets & Moons"
+            onClick={() => router.push('/planets')}
+          >
+            <div className="topic-label">
+              <div className="topic-title">PLANETS & MOONS</div>
+              <div className="topic-underline"></div>
+            </div>
+          </div>
+
+          {/* Card 2: Not wired yet (no “coming soon”, just a box) */}
+          <div id="card-landscapes" className="topic-card disabled" aria-label="Landscapes">
+            <div className="topic-label">
+              <div className="topic-title">LANDSCAPES</div>
+              <div className="topic-underline"></div>
+            </div>
+          </div>
+
+          {/* Card 3: Not wired yet */}
+          <div id="card-deepspace" className="topic-card disabled" aria-label="Deep Space">
+            <div className="topic-label">
+              <div className="topic-title">DEEP SPACE</div>
+              <div className="topic-underline"></div>
+            </div>
           </div>
         </div>
       </section>
