@@ -91,7 +91,7 @@ export default function Starfield() {
     mo.observe(document.body,{childList:true,subtree:true});
 
     /* === PLANET IMAGES === */
-    const IMG_BASE='/images/planets';
+    const IMG_BASE='/assets/planets';
     const files: { [key: string]: string } = {sun:'sun.png',mercury:'mercury.png',venus:'venus.png',earth:'earth.png',moon:'moon.png',mars:'mars.png',jupiter:'jupiter.png',saturn:'saturn.png',uranus:'uranus.png',neptune:'neptune.png',pluto:'pluto.png'};
     const tones: { [key: string]: string } = {mercury:'#a7a7a7',venus:'#d2b48c',earth:'#5bb2ff',moon:'#bdbdbd',mars:'#e06b5a',jupiter:'#caa07a',saturn:'#d3c19c',uranus:'#8fd3e6',neptune:'#6fa8ff',pluto:'#b7b1ab',sun:'#ffd36b'};
     function ensureImg(tile: Element){
