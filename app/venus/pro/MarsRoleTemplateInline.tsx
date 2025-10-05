@@ -13,7 +13,7 @@ export default function MarsRoleTemplateInline() {
 
 /* ----------------- Role-aware page body ----------------- */
 function MarsRoleTemplate() {
-  const [role, setRole] = useState("Student"); // "Kid" | "Student" | "Professional"
+  const [role, setRole] = useState<"Kid" | "Student" | "Professional">("Student");
 
   useEffect(() => {
     const r = (typeof window !== "undefined" && localStorage.getItem("role")) || "";
@@ -74,7 +74,7 @@ function MarsRoleTemplate() {
 }
 
 /* ----------------- Content per role (hard-coded) ----------------- */
-function getContent(role) {
+function getContent(role: "Kid" | "Student" | "Professional") {
   if (role === "Kid") {
     return {
       title: "Space Plants & Their Root Helpers",
