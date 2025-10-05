@@ -1,9 +1,8 @@
-import Script from "next/script";
 import "./globals.css";
 import "./MainLayout.css";
 import ErrorBoundary from "./_client/ErrorBoundary";
 import HydrationGuard from "./_client/HydrationGuard";
-import Chatbot from "./_client/Chatbot";
+import CoachFab from "./_client/CoachFab";
 import MainLayout from "./MainLayout";
 import ModalHardeningScript from "../components/ModalHardeningScript";
 import PlanetModalScript from "../components/PlanetModalScript";
@@ -46,11 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <button id="planet-modal-cancel" className="btn" type="button">Close</button>
           </div>
         </div>
-       {/* <CoachFab /> */}
-        <Chatbot />
-        <div className="gtranslate_wrapper"></div>
-        <script dangerouslySetInnerHTML={{__html: `window.gtranslateSettings = {"default_language":"en","languages":["en","fr","it","es","zh-CN"],"wrapper_selector":".gtranslate_wrapper","horizontal_position":"right","vertical_position":"top"}`}} />
-        <Script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer />
+       <CoachFab />
       </body>
     </html>
   );
