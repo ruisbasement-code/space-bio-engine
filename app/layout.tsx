@@ -2,7 +2,6 @@ import "./globals.css";
 import "./MainLayout.css";
 import ErrorBoundary from "./_client/ErrorBoundary";
 import HydrationGuard from "./_client/HydrationGuard";
-import CoachFab from "./_client/CoachFab";
 import MainLayout from "./MainLayout";
 import ModalHardeningScript from "../components/ModalHardeningScript";
 import PlanetModalScript from "../components/PlanetModalScript";
@@ -45,7 +44,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <button id="planet-modal-cancel" className="btn" type="button">Close</button>
           </div>
         </div>
-       <CoachFab />
       </body>
     </html>
   );
