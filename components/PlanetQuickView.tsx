@@ -45,16 +45,6 @@ export default function PlanetQuickView({ open, planet, onClose }: PlanetQuickVi
     return null;
   }
 
-  function getProfileFromStorage(): "kid" | "student" | "professional" {
-    const raw =
-      (typeof window !== "undefined" &&
-        (localStorage.getItem("level") || localStorage.getItem("role"))) ||
-      "";
-    const v = raw.toLowerCase();
-    if (v === "kid" || v === "student" || v === "professional") return v as any;
-    return "kid"; // safe fallback
-  }
-
   const handleLearnMore = () => {
     if (planet?.id === 'mars') {
       const raw =

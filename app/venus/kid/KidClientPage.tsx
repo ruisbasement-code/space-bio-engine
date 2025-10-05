@@ -27,8 +27,8 @@ export default function KidClientPage() {
         ? (stored as Profile)
         : "student";
 
-    let planet = qp.planet || "mars";
-    let urlProf: Profile =
+    const planet = qp.planet || "mars";
+    const urlProf: Profile =
       qp.prof === "kid" || qp.prof === "student" || qp.prof === "professional"
         ? (qp.prof as Profile)
         : "kid";
