@@ -1,0 +1,75 @@
+:root { color-scheme: dark; }
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #0b1320;
+  overflow-x: hidden;
+}
+
+/* Starfield canvas */
+#space-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #05070e;
+}
+
+/* Fade-in animation */
+.space-fade {
+  animation: spaceFadeIn 700ms ease-out both;
+}
+@keyframes spaceFadeIn {
+  from { opacity: 0; transform: translateY(8px); filter: blur(1px); }
+  to   { opacity: 1; transform: translateY(0);   filter: blur(0); }
+}
+
+/* Force main section to center vertically */
+.center-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centered hero for 3 topic cards */
+#topic-hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 24px;
+  animation: spaceFadeIn 700ms ease-out both;
+}
+#topic-hero .hdr { text-align: center; margin-bottom: 2.25rem; }
+#topic-hero .hdr h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 48px); font-weight: 600; color: #fff; }
+#topic-hero .hdr p  { margin: 0; color: rgba(255,255,255,.7); font-size: clamp(14px, 2vw, 18px); }
+
+#topic-hero .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: min(1100px, 100%);
+}
+@media (min-width: 768px) {
+  #topic-hero .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.topic-card {
+  position: relative;
+  height: 260px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+  overflow: hidden;
+  transition: transform .25s ease, background .25s ease, border-color .25s ease;
+  text-decoration: none;
+}
+.topic-card:hover { transform: translateY(-3px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.24); }
+.topic-card .inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.topic-card .title { letter-spacing: .25em; color: #fff; font-weight: 500; font-size: clamp(16px,1.6vw,20px); }
+.topic-card .underline { margin-top: 10px; height: 3px; width: 40px; background: #fff; opacity: .85; border-radius: 2px; }
+.topic-card::after { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(255,255,255,.10); border-radius: 14px; pointer-events: none; }

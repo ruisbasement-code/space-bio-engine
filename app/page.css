@@ -1,15 +1,33 @@
-/* Full-viewport centered wrapper (no framework needed) */
+/* ---- Keep your dark theme ---- */
+:root { color-scheme: dark; }
+html, body { height: 100%; margin: 0; }
+body { background: #0b1320; }
+
+/* Fullscreen animated background */
+#space-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;                 /* sits behind content */
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 800px at 70% -10%, rgba(20,30,55,0.6), transparent 60%),
+    radial-gradient(900px 600px at 20% 110%, rgba(10,20,35,0.5), transparent 60%),
+    #05070e;                   /* deepest space */
+}
+
+/* ===== Your existing centered hero (unchanged layout) ===== */
 .home-hero {
-  position: fixed;          /* ignore parent layout constraints */
-  inset: 0;                 /* fill the window */
+  position: fixed;            /* ignore parent constraints */
+  inset: 0;                   /* fill viewport */
   display: flex;
   flex-direction: column;
-  align-items: center;      /* horizontal center */
-  justify-content: center;  /* vertical center */
-  background: #0b1320;      /* keep your dark bg */
+  align-items: center;        /* horizontal center */
+  justify-content: center;    /* vertical center */
   color: #fff;
-  padding: 24px;            /* safe padding for small screens */
+  padding: 24px;
   box-sizing: border-box;
+  z-index: 1;                 /* above canvas */
+  animation: fadeInUp 700ms ease-out both;  /* subtle fade-in */
 }
 
 .home-hero h1 {
@@ -25,32 +43,25 @@
 }
 
 .topic-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
 }
 
 .topic-card {
-  height: 256px;     /* 16rem */
-  width: 288px;      /* 18rem */
+  height: 256px; width: 288px;
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.15);
   background: rgba(255,255,255,0.05);
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
   transition: background 200ms ease, transform 200ms ease;
+  will-change: transform, background;
+  backdrop-filter: blur(0.5px);
 }
-
 .topic-card:hover { background: rgba(255,255,255,0.10); transform: translateY(-2px); }
 
-/* inner frame line */
 .topic-card::after{
-  content:"";
-  position:absolute; inset:12px;
+  content:""; position:absolute; inset:12px;
   border:1px solid rgba(255,255,255,0.1);
-  border-radius:12px;
-  pointer-events:none;
+  border-radius:12px; pointer-events:none;
 }
 
 .topic-label{
@@ -58,20 +69,17 @@
   display:flex; align-items:center; justify-content:center; flex-direction:column;
   text-align:center;
 }
-
 .topic-title{
-  letter-spacing: 0.25em;
-  font-size: 18px;
-  font-weight: 500;
-  text-transform: uppercase;
-  white-space: nowrap;
+  letter-spacing: 0.25em; font-size: 18px; font-weight: 500; text-transform: uppercase; white-space: nowrap;
+  text-shadow: 0 0 10px rgba(255,255,255,0.08);
 }
-
 .topic-underline{ margin-top:8px; height:3px; width:40px; background:#fff; opacity:.85; border-radius:2px; }
 
-/* Make only the first card clickable for now */
 .clickable{ cursor:pointer; }
 .disabled{ cursor:default; }
 
-/* Optional: keep your sidebar/burger on top if you have one */
-.home-hero{ z-index: 1; }
+/* Subtle content fade-in */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); filter: blur(1px); }
+  to   { opacity: 1; transform: translateY(0);   filter: blur(0); }
+}

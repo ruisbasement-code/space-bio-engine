@@ -6,13 +6,14 @@ import CoachFab from "./_client/CoachFab";
 import MainLayout from "./MainLayout";
 import ModalHardeningScript from "../components/ModalHardeningScript";
 import PlanetModalScript from "../components/PlanetModalScript";
-
+import Starfield from "../components/Starfield";
 export const metadata = { title: "Space Biology Knowledge Engine" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <Starfield />
         <ErrorBoundary>
           <HydrationGuard>
             <MainLayout>{children}</MainLayout>
