@@ -40,10 +40,34 @@
   filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.65));
 }
 
-.label {
-  margin-top: 6px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  font-size: clamp(14px, 1.6vw, 18px);
+/* Inline card that replaces each icon+text pair */
+.planet-inline-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 0 10px;
+  vertical-align: middle;
+}
+.planet-inline-img {
+  width: clamp(64px, 8vw, 108px);
+  height: clamp(64px, 8vw, 108px);
+  border-radius: 50%;
+  object-fit: cover;            /* works well with Wikipedia photos */
+  box-shadow: 0 0 18px rgba(255,255,255,.12);
+  background: radial-gradient(circle at 40% 35%, rgba(255,255,255,.06), rgba(0,0,0,0) 70%);
+  mix-blend-mode: lighten;      /* soft blend over dark sky */
+  transition: transform .3s ease, filter .3s ease;
+}
+.planet-inline-card:hover .planet-inline-img { transform: scale(1.06); filter: brightness(1.15) contrast(1.15); }
+
+.planet-inline-name {
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: #eaeefc;
+  text-align: center;
+  line-height: 1.1;
+  white-space: nowrap;
+  user-select: none;
 }

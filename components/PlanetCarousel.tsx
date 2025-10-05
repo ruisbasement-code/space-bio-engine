@@ -106,7 +106,7 @@ export default function PlanetCarousel() {
         return (
           <div
             key={planet.id}
-            className={`planet ${isActive ? 'is-active' : ''}`}
+            className={`planet planet-inline-card ${isActive ? 'is-active' : ''}`}
             style={style}
             onClick={() => handlePlanetClick(index)}
             aria-label={`Select ${planet.name}`}
@@ -115,13 +115,14 @@ export default function PlanetCarousel() {
             data-desc={planet.summary}
           >
             <Image
+              className="planet-inline-img"
               src={planet.image || ''}
               alt={planet.name}
               width={160}
               height={160}
               priority={isActive}
             />
-            <div className="label">{planet.name}</div>
+            <div className="planet-inline-name">{planet.name}</div>
           </div>
         );
       })}
