@@ -10,14 +10,14 @@ export default function ProfilePage() {
   const router = useRouter();
 
   const [name, setName] = useState("");
-  const [level, setLevel] = useState<Level>("Student");
+  const [level, setLevel] = useState<Level>("Kid");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const storedName = localStorage.getItem("name") || "";
     const storedRole = (localStorage.getItem("role") ||
       localStorage.getItem("level") ||
-      "Student") as Level;
+      "Kid") as Level;
     setName(storedName);
     if (LEVELS.includes(storedRole)) setLevel(storedRole);
   }, []);

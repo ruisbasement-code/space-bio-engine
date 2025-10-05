@@ -1,7 +1,10 @@
+"use client";
 import BootstrapScript from "./BootstrapScript";
 import MarsRoleTemplateInline from "./MarsRoleTemplateInline";
+import TTSButton from "@/app/_client/TTSButton";
 
 export default function ProPage(){
+  const textToRead = `Atmospheric Composition and Surface Conditions of Venus. Dense, peer-style text block… include citation placeholders, radiative transfer notes, and instrument models. Additional paragraph… boundary layer, super-rotation, sulfuric aerosol microphysics, implications for in-situ bioproduction systems.`;
   return (
     <main className="main">
       <article className="glass">
@@ -14,6 +17,7 @@ export default function ProPage(){
           <div className="figure" style={{flex:1}}>Figure 1</div>
           <div className="figure" style={{flex:1}}>Figure 2</div>
         </div>
+        <TTSButton text={textToRead} />
         <div className="template-footer">
           <button id="back-btn" className="btn">Back to Planets</button>
           <a id="finish-btn" className="btn btn--primary" href="#">Finish Mission</a>
