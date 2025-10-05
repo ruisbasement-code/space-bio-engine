@@ -13,22 +13,27 @@ export default function ProfileScript() {
 
     // --------- Single, robust click handler (works across re-renders) ----------
     function onSaveAndContinue(e: MouseEvent) {
-      e.preventDefault(); e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
 
-      // persist selections
-      const name  = (document.getElementById('name-input') as HTMLInputElement)?.value?.trim();
-      const role  = ((document.getElementById('role-select') as HTMLSelectElement)?.value || 'student').toLowerCase();
-      const age   = (document.getElementById('age-input') as HTMLInputElement)?.value?.trim();
-      const ints  = (document.getElementById('interests-input') as HTMLInputElement)?.value?.trim();
+      // Get values from DOM
+      const nameInput = document.getElementById('name-input') as HTMLInputElement;
+      const levelSelect = document.getElementById('role-select') as HTMLSelectElement;
 
-      if (name) localStorage.setItem('userName', name);
-      if (age)  localStorage.setItem('userAge', age);
-      if (ints) localStorage.setItem('userInterests', ints);
-      localStorage.setItem('selectedProfile', role);
+      const name = nameInput?.value;
+      const level = levelSelect?.value;
 
-      // navigate back to main menu
-      const url = `${HOME_ROUTE}?profile=${encodeURIComponent(role)}`;
-      window.location.href = url;
+      // Save name
+      const cleaned = (name || "").trim();
+      localStorage.setItem("name", cleaned);
+
+      // Save level (and legacy 'role'), normalized
+      const normalized = (level || "student").toLowerCase();
+      localStorage.setItem("level", normalized);
+      localStorage.setItem("role", normalized);
+
+      // Go back to main page
+      window.location.href = HOME_ROUTE;
     }
 
     // ensure the button is a real button and wire it safely

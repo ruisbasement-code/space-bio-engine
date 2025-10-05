@@ -1,4 +1,5 @@
 import BootstrapScript from "./BootstrapScript";
+import MarsRoleTemplateInline from "./MarsRoleTemplateInline";
 
 export default function ProPage(){
   return (
@@ -18,6 +19,7 @@ export default function ProPage(){
           <a id="finish-btn" className="btn btn--primary" href="#">Finish Mission</a>
         </div>
       </article>
+      <MarsRoleTemplateInline />
       <BootstrapScript />
     </main>
   );

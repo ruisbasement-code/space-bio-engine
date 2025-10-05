@@ -1,14 +1,24 @@
 "use client";
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './page.css';
 
-export default function Page() {
-  const [greeting, setGreeting] = useState("Hello Commander.");
+function Greeting() {
+  const [name, setName] = useState<string>("");
+
   useEffect(() => {
-    const storedName = localStorage.getItem("profile.name");
-    if (storedName) {
-      setGreeting(`Hello ${storedName}.`);
-    }
+    if (typeof window === "undefined") return;
+    setName(localStorage.getItem("name") || "");
+  }, []);
+
+  return (
+    <h2 className="text-2xl md:text-3xl font-semibold">
+      Hello{ name ? `, ${name}` : "" }
+    </h2>
+  );
+}
+
+export default function Page() {
+  useEffect(() => {
     localStorage.removeItem("ui.lastPlanet");
   }, []);
 
@@ -16,7 +26,7 @@ export default function Page() {
     <>
       <section id="topic-hero">
         <div className="hdr">
-          <h1>{greeting}</h1>
+          <Greeting />
           <p>What would you like to learn?</p>
         </div>
         <div className="grid">

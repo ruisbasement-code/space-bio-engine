@@ -45,8 +45,31 @@ export default function PlanetQuickView({ open, planet, onClose }: PlanetQuickVi
     return null;
   }
 
+  function getProfileFromStorage(): "kid" | "student" | "professional" {
+    const raw =
+      (typeof window !== "undefined" &&
+        (localStorage.getItem("level") || localStorage.getItem("role"))) ||
+      "";
+    const v = raw.toLowerCase();
+    if (v === "kid" || v === "student" || v === "professional") return v as any;
+    return "kid"; // safe fallback
+  }
+
   const handleLearnMore = () => {
-    router.push(`/planet/${planet.id}`);
+    if (planet?.id === 'mars') {
+      const raw =
+        (localStorage.getItem("level") || localStorage.getItem("role") || "student").toLowerCase();
+      const profile =
+        raw === "kid" || raw === "student" || raw === "professional" ? raw : "student";
+
+      const url = `/venus/kid?planet=mars&profile=${profile}`;
+
+      onClose?.();
+      // ✅ HARD REDIRECT (bypasses any client cache/Link issues)
+      window.location.href = url;
+    } else {
+      router.push(`/planet/${planet.id}`);
+    }
   };
 
   return createPortal(
